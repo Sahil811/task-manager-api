@@ -1,37 +1,43 @@
-const sgMail = require('@sendgrid/mail')
+const sgMail = require("@sendgrid/mail");
+const dotenv = require("dotenv");
+const path = require("path");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+dotenv.config({ path: path.resolve(__dirname, "../../config/dev.env") });
 
-const sendWelcomeEmail = (email, name) => {
-    sgMail.send({
-        to: email,
-        from: 'sahilsiddiqui.dev@gmail.com',
-        subject: 'Thanks for joining in!',
-        text: `Welcome to the app, ${name}. Let me know how you get along with the app.`
-    }).then(() => {
-        console.log('Message send');
-    }).catch((error) => {
-        console.log(error.response.body)
-    })
-}
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const sendCancellationEmail = (email, name) => {
-    sgMail.send({
-        to: email,
-        from: 'sahilsiddiqui.dev@gmail.com',
-        subject: 'Sorry to see you go!',
-        text: `Goodbye, ${name}. I hope to see you back sometimes soon.`
-    }).then(() => {
-        console.log('Message send');
-    }).catch((error) => {
-        console.log(error.response.body)
-    })
-}
+const sendWelcomeEmail = async (email, name) => {
+  try {
+    await sgMail.send({
+      to: email,
+      from: "sahilsiddiqui.dev@gmail.com",
+      subject: "Thanks for joining in!",
+      text: `Welcome to the app, ${name}. Let me know how you get along with the app.`,
+    });
+    console.log("Message send!");
+  } catch (e) {
+    console.log("error", e);
+  }
+};
+
+const sendCancellationEmail = async (email, name) => {
+  try {
+    await sgMail.send({
+      to: email,
+      from: "sahilsiddiqui.dev@gmail.com",
+      subject: "Sorry to see you go!",
+      text: `Goodbye, ${name}. I hope to see you back sometimes soon.`,
+    });
+    console.log("Message send!");
+  } catch (e) {
+    console.log("error", e);
+  }
+};
 
 module.exports = {
-    sendWelcomeEmail,
-    sendCancellationEmail
-}
+  sendWelcomeEmail,
+  sendCancellationEmail,
+};
 
 // sgMail.send({
 //     to: 'sahilsiddiqui.dev@gmail.com',

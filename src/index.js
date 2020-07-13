@@ -1,25 +1,33 @@
-const express = require('express')
-require('./db/mongoose')
-const userRouter = require('./routers/user')
-const taskRouter = require('./routers/task')
+const app = require("./app");
+const path = require("path");
 
-const app = express()
-const port = process.env.PORT 
+const dotenv = require("dotenv");
 
-app.use(express.json())
-app.use(userRouter)
-app.use(taskRouter)
+dotenv.config({ path: path.resolve(__dirname, "../config/dev.env") });
+
+const port = 3000 || process.env.PORT;
 
 app.listen(port, () => {
-    console.log('Server is up on port ' + port)
-})
+  console.log("Server is up on port " + port);
+});
 
-const bcrypt = require('bcryptjs')
+// const express = require('express')
+// require('./db/mongoose')
+// const userRouter = require('./routers/user')
+// const taskRouter = require('./routers/task')
 
-const jwt = require('jsonwebtoken')
+// const app = express()
 
-const Task = require('./models/task')
-const User = require('./models/user')
+// app.use(express.json())
+// app.use(userRouter)
+// app.use(taskRouter)
+
+// const bcrypt = require('bcryptjs')
+
+// const jwt = require('jsonwebtoken')
+
+// const Task = require('./models/task')
+// const User = require('./models/user')
 
 // const main = async () => {
 //     // const task = await Task.findById('')

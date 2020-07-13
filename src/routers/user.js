@@ -132,13 +132,13 @@ router.delete('/users/me',auth, async (req, res) => {
         // if (!user) {
         //     return res.status(404).send()
         // }
-        await req.user.removed()
+        await req.user.remove()
         sendCancellationEmail(req.user.email, req.user.name)
         res.send(req.user)
 
         res.send(user)
     } catch (e) {
-       res.status(500).send(e)
+       res.status(500).send()
     }
 })
 
