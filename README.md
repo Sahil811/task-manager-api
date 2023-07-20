@@ -1,7 +1,3 @@
-# task-manager-api
-
-Here is a draft README.md for a task manager API repository:
-
 # Task Manager API
 
 This is a REST API for a task/todo manager web application, built with Node.js, Express, and MongoDB.
